@@ -3,17 +3,22 @@
 
 ## Write a short comment describing this function
 
+library(MASS)
 makeCacheMatrix <- function(x = matrix()) {
-        inv <- NULL
+        inv <- NULL                        # initializing inverse as NULL
         set <- function (y) {
                 x <<- y
                 inv <<- NULL        
         }
-        get <- function() x
+        get <- function() x               # function to get matrix x 
         setInverse <- function(inverse) inv <<- inverse
-        getInverse <- function() inv
+        getInverse <- function() {
+                inver<-ginv(x)
+                inver%*%        
+        }
         list(set = set, get = get,
-             setInverse = setInverse)             
+             setInverse = setInverse
+             getInverse = getInverse)             
 }
 
 
@@ -29,4 +34,5 @@ cacheSolve <- function(x, ...) {
         data <- x$get()
         inv <- solve(data, ...)
         x$setInverse(inv)
+        inv
 }
